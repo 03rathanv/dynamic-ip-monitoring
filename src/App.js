@@ -1,54 +1,77 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import IPCard from "./components/IPCard";
-import IPChart from "./components/IPChart";
-import "./App.css";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
 
 function App() {
   const [ipData, setIpData] = useState([]);
-  const [currentIP, setCurrentIP] = useState("");
+  const [currentIp, setCurrentIp] = useState("");
   const [lastUpdated, setLastUpdated] = useState("");
 
-  // Fetch IP history from Flask backend
-  const fetchIPData = async () => {
+  // Fetch IP data from Flask API
+  const fetchIpData = async () => {
     try {
-      const res = await axios.get("https://dynamic-ip-monitoring.onrender.com/api/ip-history");
-      const data = res.data.map((item) => ({
-        ...item,
-        timestamp: new Date(item.timestamp).toLocaleTimeString(),
-      }));
+      const response = await axios.get("http://127.0.0.1:5000/api/ip-history");
+      const data = response.data;
 
-      setIpData(data);
+      setIpData(
+        data.map((item) => ({
+          ip: item.ip,
+          timestamp: new Date(item.timestamp).toLocaleTimeString(),
+        }))
+      );
 
       if (data.length > 0) {
-        const latest = data[data.length - 1];
-        setCurrentIP(latest.ip);
-        setLastUpdated(latest.timestamp);
+        setCurrentIp(data[data.length - 1].ip);
+        setLastUpdated(
+          new Date(data[data.length - 1].timestamp).toLocaleString()
+        );
       }
     } catch (error) {
-      console.error("Error fetching IP history:", error);
+      console.error("Error fetching IP data:", error);
+      setLastUpdated("Invalid Date");
     }
   };
 
   useEffect(() => {
-    fetchIPData();
-    const interval = setInterval(fetchIPData, 5000); // refresh every 5s
+    fetchIpData();
+    const interval = setInterval(fetchIpData, 10000); // refresh every 10 sec
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
-      <h1 className="text-3xl font-bold text-blue-700 mb-4">
+    <div style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: "bold" }}>
         Dynamic IP Monitoring Dashboard
       </h1>
-      <IPCard currentIP={currentIP} lastUpdated={lastUpdated} />
-      <IPChart data={ipData} />
+
+      <h3>Current Public IP</h3>
+      <p style={{ fontSize: "18px" }}>{currentIp || "Loading..."}</p>
+      <p>
+        <strong>Last Updated:</strong> {lastUpdated || "Invalid Date"}
+      </p>
+
+      <h3 style={{ marginTop: "40px" }}>IP Change Timeline</h3>
+      <div style={{ width: "100%", height: "300px" }}>
+        <ResponsiveContainer>
+          <LineChart data={ipData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="timestamp" />
+            <YAxis dataKey="ip" hide />
+            <Tooltip />
+            <Line type="monotone" dataKey="ip" stroke="#8884d8" dot />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
 
 export default App;
-
-fetch('http://localhost:5000/api/endpoint')
-
-
