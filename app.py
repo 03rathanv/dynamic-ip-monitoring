@@ -148,3 +148,4 @@ def get_ip_history():
 if __name__ == "__main__":
     check_ip_change()  # run once on startup
     app.run(debug=True, use_reloader=False, port=5000)
+    
