@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/dynamic-ip-frontend/static/css/main.e6c13ad2.css",
-    "main.js": "/dynamic-ip-frontend/static/js/main.f2247a77.js",
+    "main.js": "/dynamic-ip-frontend/static/js/main.eab19a22.js",
     "static/js/453.c049cc72.chunk.js": "/dynamic-ip-frontend/static/js/453.c049cc72.chunk.js",
     "index.html": "/dynamic-ip-frontend/index.html",
     "main.e6c13ad2.css.map": "/dynamic-ip-frontend/static/css/main.e6c13ad2.css.map",
-    "main.f2247a77.js.map": "/dynamic-ip-frontend/static/js/main.f2247a77.js.map",
+    "main.eab19a22.js.map": "/dynamic-ip-frontend/static/js/main.eab19a22.js.map",
     "453.c049cc72.chunk.js.map": "/dynamic-ip-frontend/static/js/453.c049cc72.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.f2247a77.js"
+    "static/js/main.eab19a22.js"
   ]
 }
