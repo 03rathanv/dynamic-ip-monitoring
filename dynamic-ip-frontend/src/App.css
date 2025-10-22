@@ -14,22 +14,19 @@
 }
 
 .App-header {
-<<<<<<< HEAD
+
   background-color: #32b598;
-=======
   background-color: #266667;
->>>>>>> cfb19cda6906059e2d75510de77dd0d0769526ed
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-<<<<<<< HEAD
+
   color: rgb(0, 0, 0);
-=======
   color: rgb(2, 0, 6);
->>>>>>> cfb19cda6906059e2d75510de77dd0d0769526ed
+
 }
 
 .App-link {
@@ -50,7 +47,5 @@
   margin-top: 100px;
   line-height: 2.5; /* increases gap between lines */
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> cfb19cda6906059e2d75510de77dd0d0769526ed
+
